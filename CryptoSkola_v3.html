@@ -1,0 +1,1666 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CryptoSkola — Izglītojoša mājaslapa par kriptovalūtām</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   CRYPTOSKOLA — KRĀSU KODI UN TO NOZĪME
+   ============================================
+   
+   PAMATKRĀSAS:
+   #0C1016 — Galvenais fons (tumši zaļganmelns)
+          Nozīme: rada noslēpumainu, tehnoloģisku 
+          sajūtu, asociējas ar šifrēšanu un drošību,
+          tumšāks tonis nekā standarta tumšie dizaini
+   
+   #131A21 — Sekundārais fons (tumši zilganpelēks)
+          Nozīme: kartīšu un sadaļu fons, veido 
+          vizuālu hierarhiju un nodalījumu
+   
+   #1C2631 — Terciārais fons (vidēji tumšs zilpelēks)
+          Nozīme: hover efekti, aktīvie elementi,
+          navigācijas joslas fons
+   
+   AKCENTKRĀSAS:
+   #00D4AA — Galvenā akcentkrāsa (teal/ciāna zaļš)
+          Nozīme: digitālā inovācija, blokķēdes 
+          tehnoloģiju zaļā nākotne, uzticamība un 
+          progress — krāsa, kas asociējas ar fintech 
+          un jaunām tehnoloģijām
+   
+   #00B892 — Tumšāks teal (hover stāvoklis)
+          Nozīme: interaktīvs efekts pogām un saitēm
+   
+   #34D399 — Zaļā krāsa (gaiša piparmētru zaļā)
+          Nozīme: pozitīvs, drošs — "pareizi" 
+          elementi, veiksmīgas darbības apstiprinājums
+   
+   #F87171 — Koraļļu sarkanā (brīdinājums)
+          Nozīme: maigāks brīdinājuma tonis, risks, 
+          krāpniecības norādes — ne pārāk agresīvs
+   
+   #60A5FA — Debeszilā krāsa (informācija)
+          Nozīme: saites, informatīvi elementi,
+          regulējuma sadaļa, mierīgs tonis
+   
+   #C084FC — Lavandas violetā (papildu akcents)
+          Nozīme: blokķēdes un tehnoloģiju tēmas, 
+          vārdnīca, rada kontrastu ar galveno akcentu
+   
+   TEKSTA KRĀSAS:
+   #EFF6EE — Galvenais teksts (silti balta ar zaļu nianci)
+          Nozīme: mīkstāks nekā tīri balta, ērtāks 
+          acīm ilgstošā lasīšanā uz tumša fona
+   
+   #8899A6 — Sekundārais teksts (zilganpelēks)
+          Nozīme: apakšvirsraksti, papildu informācija,
+          mazāk svarīgs saturs
+   
+   #B8C9D4 — Terciārais teksts (gaiši zilganpelēks)
+          Nozīme: pamatteksts moduļos un aprakstos
+   
+   FONTI:
+   "DM Sans" — virsrakstiem (ģeometrisks, mūsdienīgs, 
+               atšķirīgs no standarta fontiem, labs 
+               lasāmība virsrakstos)
+   "IBM Plex Sans" — pamattekstam (profesionāls, 
+               tehnoloģisks raksturs, izstrādāts labi 
+               lasāmam ekrāna tekstam)
+   ============================================ */
+
+:root {
+  --bg-primary: #0C1016;
+  --bg-secondary: #131A21;
+  --bg-tertiary: #1C2631;
+  --bg-card: #151D27;
+  --accent-orange: #00D4AA;
+  --accent-orange-hover: #00B892;
+  --accent-green: #34D399;
+  --accent-red: #F87171;
+  --accent-blue: #60A5FA;
+  --accent-purple: #C084FC;
+  --text-primary: #EFF6EE;
+  --text-secondary: #8899A6;
+  --text-body: #B8C9D4;
+  --border-color: #1C2631;
+  --glow-orange: rgba(0, 212, 170, 0.12);
+  --glow-blue: rgba(96, 165, 250, 0.08);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-body);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* NAVIGĀCIJA */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(11, 14, 23, 0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-color);
+  padding: 0 2rem;
+  transition: all 0.3s ease;
+}
+
+.nav-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--text-primary);
+}
+
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  background: linear-gradient(135deg, var(--accent-orange), #5EEDC9);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  color: var(--bg-primary);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a:hover {
+  color: var(--accent-orange);
+}
+
+.nav-auth {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 22px;
+  border-radius: 8px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--text-secondary);
+}
+
+.btn-primary {
+  background: var(--accent-orange);
+  color: var(--bg-primary);
+}
+
+.btn-primary:hover {
+  background: var(--accent-orange-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 212, 170, 0.3);
+}
+
+.btn-secondary {
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent-orange);
+  transform: translateY(-1px);
+}
+
+.btn-large {
+  padding: 14px 32px;
+  font-size: 1rem;
+}
+
+/* HERO SEKCIJA */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 2rem 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 40%, rgba(0, 212, 170, 0.06) 0%, transparent 50%),
+              radial-gradient(circle at 70% 60%, rgba(96, 165, 250, 0.04) 0%, transparent 50%);
+  animation: heroGlow 15s ease-in-out infinite alternate;
+}
+
+@keyframes heroGlow {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(-5%, 3%); }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 800px;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--glow-orange);
+  border: 1px solid rgba(0, 212, 170, 0.25);
+  padding: 8px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  color: var(--accent-orange);
+  font-weight: 500;
+  margin-bottom: 2rem;
+}
+
+.hero h1 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 3.8rem;
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 span {
+  background: linear-gradient(135deg, var(--accent-orange), #5EEDC9);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.8;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 4rem;
+  padding-top: 3rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-number {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+/* SEKCIJU STILS */
+.section {
+  padding: 100px 2rem;
+}
+
+.section-alt {
+  background: var(--bg-secondary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.section-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent-orange);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+  letter-spacing: -0.01em;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* MODUĻU KARTĪTES */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 24px;
+  align-items: start;
+}
+
+.module-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.module-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.module-card:hover {
+  border-color: rgba(0, 212, 170, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.module-card:hover::before {
+  opacity: 1;
+}
+
+.module-number {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-orange);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  margin-bottom: 12px;
+}
+
+.module-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  margin-bottom: 16px;
+}
+
+.module-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.module-card p {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.module-topics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.topic-tag {
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.module-difficulty {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 16px;
+  font-size: 0.8rem;
+}
+
+.diff-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/* UZTICAMIE AVOTI */
+.sources-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.source-column {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 32px;
+}
+
+.source-column.safe {
+  border-top: 3px solid var(--accent-green);
+}
+
+.source-column.danger {
+  border-top: 3px solid var(--accent-red);
+}
+
+.source-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.source-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
+}
+
+.source-icon.safe {
+  background: rgba(52, 211, 153, 0.15);
+}
+
+.source-icon.danger {
+  background: rgba(248, 113, 113, 0.15);
+}
+
+.source-header h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.source-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.source-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+.source-list .check { color: var(--accent-green); font-weight: 700; }
+.source-list .cross { color: var(--accent-red); font-weight: 700; }
+
+/* REGULĒJUMS */
+.regulations-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.reg-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  padding: 28px;
+  transition: all 0.3s;
+}
+
+.reg-card:hover {
+  border-color: rgba(96, 165, 250, 0.3);
+  transform: translateY(-2px);
+}
+
+.reg-number {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-blue);
+  opacity: 0.3;
+  margin-bottom: 8px;
+}
+
+.reg-card h3 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 10px;
+}
+
+.reg-card p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+/* VĀRDNĪCA */
+.glossary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+}
+
+.gloss-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 24px;
+  transition: all 0.3s;
+}
+
+.gloss-item:hover {
+  border-color: rgba(192, 132, 252, 0.3);
+}
+
+.gloss-term {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: var(--accent-purple);
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.gloss-def {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* TESTS */
+.quiz-container {
+  max-width: 700px;
+  margin: 0 auto;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 40px;
+}
+
+.quiz-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 32px;
+}
+
+.quiz-progress-bar {
+  flex: 1;
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.quiz-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-orange), var(--accent-blue));
+  border-radius: 3px;
+  transition: width 0.5s ease;
+}
+
+.quiz-progress-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.quiz-question {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 28px;
+  line-height: 1.4;
+}
+
+.quiz-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.quiz-option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-size: 1rem;
+  color: var(--text-body);
+}
+
+.quiz-option:hover {
+  border-color: var(--accent-orange);
+  background: rgba(0, 212, 170, 0.05);
+}
+
+.quiz-option.selected {
+  border-color: var(--accent-orange);
+  background: rgba(0, 212, 170, 0.1);
+  color: var(--text-primary);
+}
+
+.quiz-option.correct {
+  border-color: var(--accent-green);
+  background: rgba(52, 211, 153, 0.1);
+  color: var(--accent-green);
+}
+
+.quiz-option.wrong {
+  border-color: var(--accent-red);
+  background: rgba(248, 113, 113, 0.1);
+  color: var(--accent-red);
+}
+
+.quiz-option-letter {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--accent-orange);
+  flex-shrink: 0;
+}
+
+.quiz-feedback {
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 0.95rem;
+  display: none;
+}
+
+.quiz-feedback.correct {
+  display: block;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.3);
+  color: var(--accent-green);
+}
+
+.quiz-feedback.wrong {
+  display: block;
+  background: rgba(248, 113, 113, 0.1);
+  border: 1px solid rgba(248, 113, 113, 0.3);
+  color: var(--accent-red);
+}
+
+.quiz-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.quiz-result {
+  text-align: center;
+  display: none;
+}
+
+.quiz-score {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 4rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-orange), var(--accent-blue));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.quiz-score-label {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  margin-bottom: 24px;
+}
+
+/* LOGIN / REĢISTRĀCIJA MODĀLIS */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  padding: 48px 40px;
+  width: 90%;
+  max-width: 440px;
+  position: relative;
+  animation: modalIn 0.3s ease;
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: translateY(20px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+.modal-close {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+.modal h2 {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.modal-subtitle {
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 0.95rem;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  font-weight: 600;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 14px 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  color: var(--text-primary);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--accent-orange);
+  box-shadow: 0 0 0 3px rgba(0, 212, 170, 0.1);
+}
+
+.form-group input::placeholder {
+  color: var(--text-secondary);
+  opacity: 0.5;
+}
+
+.form-submit {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.modal-switch {
+  text-align: center;
+  margin-top: 24px;
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+}
+
+.modal-switch a {
+  color: var(--accent-orange);
+  text-decoration: none;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal-switch a:hover {
+  text-decoration: underline;
+}
+
+/* FOOTER */
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-color);
+  padding: 60px 2rem 30px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 48px;
+}
+
+.footer-brand p {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  margin-top: 16px;
+  line-height: 1.6;
+}
+
+.footer-col h4 {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  font-size: 0.95rem;
+}
+
+.footer-col a {
+  display: block;
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 0.9rem;
+  margin-bottom: 10px;
+  transition: color 0.3s;
+}
+
+.footer-col a:hover {
+  color: var(--accent-orange);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+}
+
+.godiga-dizaina {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(52, 211, 153, 0.1);
+  border: 1px solid rgba(52, 211, 153, 0.2);
+  padding: 6px 14px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  color: var(--accent-green);
+  font-weight: 600;
+}
+
+/* HAMBURGER MENU */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.hamburger span {
+  width: 24px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: all 0.3s;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .hero h1 { font-size: 2.5rem; }
+  .nav-links, .nav-auth { display: none; }
+  .hamburger { display: flex; }
+  .modules-grid { grid-template-columns: 1fr; }
+  .sources-grid { grid-template-columns: 1fr; }
+  .regulations-content { grid-template-columns: 1fr; }
+  .footer-content { grid-template-columns: 1fr 1fr; gap: 32px; }
+  .hero-stats { flex-direction: column; gap: 1.5rem; }
+  .section { padding: 60px 1.2rem; }
+}
+
+@media (max-width: 500px) {
+  .hero h1 { font-size: 2rem; }
+  .section-title { font-size: 1.8rem; }
+  .quiz-container { padding: 24px; }
+  .modal { padding: 32px 24px; }
+  .footer-content { grid-template-columns: 1fr; }
+}
+
+/* SCROLL ANIMĀCIJAS */
+.fade-up {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAVIGĀCIJA -->
+<nav class="navbar">
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-icon">CS</div>
+      CryptoSkola
+    </a>
+    <ul class="nav-links">
+      <li><a href="#modules">Mācību moduļi</a></li>
+      <li><a href="#sources">Uzticami avoti</a></li>
+      <li><a href="#regulations">Regulējums</a></li>
+      <li><a href="#glossary">Vārdnīca</a></li>
+      <li><a href="#quiz">Tests</a></li>
+    </ul>
+    <div class="nav-auth">
+      <button class="btn btn-ghost" id="btnLogin">Ielogoties</button>
+      <button class="btn btn-primary" id="btnRegister">Reģistrēties</button>
+    </div>
+    <button class="hamburger" id="hamburgerBtn">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">🎓 Bezmaksas izglītības platforma</div>
+    <h1>Apgūsti <span>kriptovalūtas</span> no nulles</h1>
+    <p>Vienkārša, strukturēta un uzticama izglītības platforma latviešu valodā. Bez reklāmām, bez spiediena — tikai zināšanas.</p>
+    <div class="hero-buttons">
+      <a href="#modules" class="btn btn-primary btn-large">Sākt mācīties →</a>
+      <a href="#quiz" class="btn btn-secondary btn-large">Pārbaudīt zināšanas</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-number">6</div>
+        <div class="stat-label">Mācību moduļi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">30+</div>
+        <div class="stat-label">Terminu skaidrojumi</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-number">100%</div>
+        <div class="stat-label">Bezmaksas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MĀCĪBU MODUĻI -->
+<section id="modules" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📚 Saturs</div>
+      <h2 class="section-title">Mācību moduļi</h2>
+      <p class="section-desc">Secīgi sakārtots saturs no pamatlīmeņa līdz vidējam. Katrs modulis beidzas ar galvenajām atziņām.</p>
+    </div>
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-number">Modulis 01</div>
+        <div class="module-icon" style="background: rgba(0, 212, 170, 0.12);">₿</div>
+        <h3>Kas ir kriptovalūtas?</h3>
+        <p>Pamata izpratne par digitālo valūtu — kas tā ir, kā tā radās un kāpēc cilvēki to izmanto.</p>
+        <div class="module-topics">
+          <span class="topic-tag">Definīcija</span>
+          <span class="topic-tag">Vēsture</span>
+          <span class="topic-tag">Bitcoin</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-green);"></span>
+          <span style="color: var(--accent-green); font-weight: 600;">Iesācējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--text-primary);">Kriptovalūta</strong> ir digitāla jeb virtuāla valūta, kas izmanto kriptogrāfiju drošībai. Atšķirībā no parastās naudas (eiro, dolāri), kriptovalūtas nav atkarīgas no centrālās bankas vai valdības.
+            <br><br>
+            <strong style="color: var(--text-primary);">Bitcoin (BTC)</strong> ir pirmā un pazīstamākā kriptovalūta, ko 2009. gadā izveidoja persona vai grupa ar pseidonīmu Satoshi Nakamoto. Tā tika radīta kā alternatīva tradicionālajai finanšu sistēmai pēc 2008. gada finanšu krīzes.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> Kriptovalūtas ir decentralizētas — tās kontrolē tīkla dalībnieki, nevis viena organizācija. Tas nozīmē lielāku brīvību, bet arī lielāku atbildību.
+          </p>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Modulis 02</div>
+        <div class="module-icon" style="background: rgba(192, 132, 252, 0.12);">⛓</div>
+        <h3>Blokķēdes tehnoloģija</h3>
+        <p>Kā darbojas blokķēde — tehnoloģija aiz kriptovalūtām. Kāpēc tā ir droša un caurskatāma.</p>
+        <div class="module-topics">
+          <span class="topic-tag">Bloki</span>
+          <span class="topic-tag">Decentralizācija</span>
+          <span class="topic-tag">Drošība</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-green);"></span>
+          <span style="color: var(--accent-green); font-weight: 600;">Iesācējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--text-primary);">Blokķēde (blockchain)</strong> ir digitāla grāmata, kurā tiek ierakstītas visas transakcijas. Iedomājies to kā ķēdi no blokiem — katrs bloks satur informāciju par vairākām transakcijām, un tie ir savienoti hronoloģiskā secībā.
+            <br><br>
+            <strong style="color: var(--text-primary);">Kāpēc tā ir droša?</strong> Kad bloks ir pievienots ķēdei, to praktiski nav iespējams mainīt. Informācija tiek glabāta tūkstošiem datoru visā pasaulē vienlaikus, tāpēc nav iespējams to viltot.
+            <br><br>
+            <strong style="color: var(--text-primary);">Transakcijas</strong> tiek apstiprinātas ar speciālu procesu — katru darījumu pārbauda un apstiprina tīkla dalībnieki, nevis banka.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> Blokķēde nodrošina caurskatāmību — jebkurš var pārbaudīt transakciju vēsturi, bet neviens nevar to mainīt.
+          </p>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Modulis 03</div>
+        <div class="module-icon" style="background: rgba(96, 165, 250, 0.12);">👛</div>
+        <h3>Kriptovalūtu maki</h3>
+        <p>Kā droši glabāt kriptovalūtas. Dažādu maku veidi un kā izvēlēties sev piemērotāko.</p>
+        <div class="module-topics">
+          <span class="topic-tag">Hot wallet</span>
+          <span class="topic-tag">Cold wallet</span>
+          <span class="topic-tag">Drošība</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-green);"></span>
+          <span style="color: var(--accent-green); font-weight: 600;">Iesācējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--text-primary);">Kriptovalūtu maciņš (wallet)</strong> ir rīks, kas ļauj glabāt, sūtīt un saņemt kriptovalūtas. Tas nesatur pašu naudu — tas glabā privātās atslēgas, kas dod pieeju taviem līdzekļiem blokķēdē.
+            <br><br>
+            <strong style="color: var(--text-primary);">Hot wallet</strong> — tiešsaistē pieejams maciņš (lietotne, vietne). Ērti lietojams ikdienai, bet mazāk drošs, jo ir savienots ar internetu.
+            <br><br>
+            <strong style="color: var(--text-primary);">Cold wallet</strong> — bezsaistes maciņš (USB ierīce, papīra maciņš). Drošāks, jo nav pieslēgts internetam, piemērots lielāku summu ilgtermiņa glabāšanai.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> Nekad nedalies ar savu privāto atslēgu vai seed frāzi! Kas kontrolē atslēgu — tam pieder kriptovalūta.
+          </p>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Modulis 04</div>
+        <div class="module-icon" style="background: rgba(52, 211, 153, 0.12);">📊</div>
+        <h3>Kā darbojas tirgus?</h3>
+        <p>Biržas, cenu veidošanās, piedāvājums un pieprasījums. Kā lasīt grafikus un saprast tendences.</p>
+        <div class="module-topics">
+          <span class="topic-tag">Biržas</span>
+          <span class="topic-tag">Cenas</span>
+          <span class="topic-tag">Tendences</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-orange);"></span>
+          <span style="color: var(--accent-orange); font-weight: 600;">Vidējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--text-primary);">Kriptovalūtu biržas</strong> ir platformas, kur cilvēki pērk un pārdod kriptovalūtas. Populārākās ir Binance, Coinbase un Kraken.
+            <br><br>
+            <strong style="color: var(--text-primary);">Cenu nosaka tirgus</strong> — piedāvājums un pieprasījums. Ja daudz cilvēku grib pirkt Bitcoin, cena aug. Ja daudzi pārdod — cena krīt. Kriptovalūtu tirgus ir ļoti svārstīgs (volatile).
+            <br><br>
+            <strong style="color: var(--accent-red);">⚠️ Svarīgi:</strong> Nekad neieguldi naudu, ko nevari atļauties zaudēt! Kriptovalūtu cenas var strauji mainīties abos virzienos.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> Tirgus ir neparedzams — neviens nevar garantēt peļņu. Vienmēr veic savu izpēti pirms jebkāda lēmuma.
+          </p>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Modulis 05</div>
+        <div class="module-icon" style="background: rgba(248, 113, 113, 0.12);">🛡</div>
+        <h3>Drošība un krāpniecības</h3>
+        <p>Kā atpazīt krāpnieciskus piedāvājumus un aizsargāt savus līdzekļus kriptovalūtu pasaulē.</p>
+        <div class="module-topics">
+          <span class="topic-tag">Scam</span>
+          <span class="topic-tag">Phishing</span>
+          <span class="topic-tag">Aizsardzība</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-orange);"></span>
+          <span style="color: var(--accent-orange); font-weight: 600;">Vidējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--accent-red);">Biežākie krāpniecības veidi:</strong>
+            <br>
+            • <strong style="color: var(--text-primary);">Phishing</strong> — viltotas vietnes un e-pasti, kas izskatās kā īstās biržas, lai nozagtu pieejas datus.
+            <br>
+            • <strong style="color: var(--text-primary);">Ponzi shēmas</strong> — solījumi par garantētu peļņu, kur vecajiem ieguldītājiem maksā no jauno naudu.
+            <br>
+            • <strong style="color: var(--text-primary);">Pump & Dump</strong> — mākslīgi uzpūsta kriptovalūtas cena, lai pēc tam pārdotu ar peļņu.
+            <br><br>
+            <strong style="color: var(--accent-green);">Kā sevi aizsargāt:</strong> Izmanto divu faktoru autentifikāciju (2FA), nekad nedali privātās atslēgas, pārbaudi URL adreses un nekad neuzticies solījumiem par garantētu peļņu.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> Ja kaut kas izklausās pārāk labi, lai būtu patiesība — tas parasti tā arī ir.
+          </p>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-number">Modulis 06</div>
+        <div class="module-icon" style="background: rgba(0, 212, 170, 0.12);">🌐</div>
+        <h3>NFT un digitālā māksla</h3>
+        <p>Kas ir NFT, kā tie darbojas un kā tie ir saistīti ar blokķēdi. Digitālās mākslas nākotne.</p>
+        <div class="module-topics">
+          <span class="topic-tag">NFT</span>
+          <span class="topic-tag">Digitālā māksla</span>
+          <span class="topic-tag">Platformas</span>
+        </div>
+        <div class="module-difficulty">
+          <span class="diff-dot" style="background: var(--accent-orange);"></span>
+          <span style="color: var(--accent-orange); font-weight: 600;">Vidējs</span>
+        </div>
+        <div class="module-expanded" style="margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--border-color);">
+          <p style="color: var(--text-body); line-height: 1.8; font-size: 0.95rem;">
+            <strong style="color: var(--text-primary);">NFT (Non-Fungible Token)</strong> jeb neaizstājams tokens ir unikāls digitāls sertifikāts blokķēdē, kas apliecina digitāla objekta īpašumtiesības. Atšķirībā no Bitcoin, katrs NFT ir unikāls un nav aizstājams ar citu.
+            <br><br>
+            <strong style="color: var(--text-primary);">Populārākās NFT platformas:</strong> OpenSea, Rarible, Foundation. Šajās platformās mākslinieki var pārdot savu digitālo mākslu tieši pircējiem bez starpniekiem.
+            <br><br>
+            <strong style="color: var(--accent-orange);">Galvenā atziņa:</strong> NFT tehnoloģija var mainīt veidu, kā mēs uztveram digitālo īpašumu, bet tirgus ir ļoti svārstīgs un spekulatīvs.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- UZTICAMI AVOTI -->
+<section id="sources" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">🔍 Avoti</div>
+      <h2 class="section-title">Uzticamākie avoti</h2>
+      <p class="section-desc">Zini, kur meklēt uzticamu informāciju un no kā izvairīties.</p>
+    </div>
+    <div class="sources-grid">
+      <div class="source-column safe">
+        <div class="source-header">
+          <div class="source-icon safe">✓</div>
+          <h3>Pārbaudīti avoti</h3>
+        </div>
+        <ul class="source-list">
+          <li><span class="check">✓</span> <strong>CoinDesk.com</strong> — vadošais kriptovalūtu ziņu portāls ar profesionālu žurnālistiku</li>
+          <li><span class="check">✓</span> <strong>CoinTelegraph.com</strong> — plašs analītisko rakstu klāsts par tirgus tendencēm</li>
+          <li><span class="check">✓</span> <strong>Decrypt.co</strong> — iesācējiem draudzīgi skaidrojumi un jaunumi</li>
+          <li><span class="check">✓</span> <strong>CryptoSlate.com</strong> — detalizēti dati par kriptovalūtām un projektiem</li>
+          <li><span class="check">✓</span> <strong>Bitcoin.org</strong> — oficiālais Bitcoin informācijas resurss</li>
+        </ul>
+      </div>
+      <div class="source-column danger">
+        <div class="source-header">
+          <div class="source-icon danger">✕</div>
+          <h3>Esi piesardzīgs!</h3>
+        </div>
+        <ul class="source-list">
+          <li><span class="cross">✕</span> <strong>Piedāvājumi, kas sola ātru peļņu</strong> — "nopelni 1000€ dienā" gandrīz vienmēr ir krāpniecība</li>
+          <li><span class="cross">✕</span> <strong>Anonīmi Telegram kanāli</strong> — bieži izmanto, lai manipulētu ar cenām</li>
+          <li><span class="cross">✕</span> <strong>Nepamatoti blogu ieraksti</strong> — izvērtē autora kvalifikāciju un motivāciju</li>
+          <li><span class="cross">✕</span> <strong>"Guru" sociālajos tīklos</strong> — bieži reklamē projektus par atlīdzību, nebrīdinot par riskiem</li>
+          <li><span class="cross">✕</span> <strong>Viltus ziņu vietnes</strong> — pārbaudi informāciju vairākos uzticamos avotos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGULĒJUMS -->
+<section id="regulations" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">⚖️ Regulējums</div>
+      <h2 class="section-title">Tiesiskais regulējums</h2>
+      <p class="section-desc">Ko svarīgi zināt par kriptovalūtu juridisko statusu un nodokļiem Latvijā un pasaulē.</p>
+    </div>
+    <div class="regulations-content">
+      <div class="reg-card">
+        <div class="reg-number">01</div>
+        <h3>Kāpēc svarīgi zināt regulējumu?</h3>
+        <p>Pirms sāc darboties ar kriptovalūtām, ir svarīgi saprast tiesisko vidi. Dažādās valstīs regulējums atšķiras — kaut kas likumīgs vienā valstī var būt aizliegts citā. Latvijā kriptovalūtu darbības regulē FKTK un VID.</p>
+      </div>
+      <div class="reg-card">
+        <div class="reg-number">02</div>
+        <h3>Nodokļu jautājumi</h3>
+        <p>Latvijā ienākumi no kriptovalūtu tirdzniecības ir apliekami ar iedzīvotāju ienākuma nodokli. Ja gūsti peļņu, pārdodot kriptovalūtas, tev ir pienākums to deklarēt VID. Nodokļa likme var būt 20% vai 25,5% atkarībā no situācijas.</p>
+      </div>
+      <div class="reg-card">
+        <div class="reg-number">03</div>
+        <h3>Kriptovalūtu juridiskais statuss</h3>
+        <p>Kriptovalūtas Latvijā netiek uzskatītas par likumīgu maksāšanas līdzekli — tās tiek klasificētas kā virtuālā valūta. Tomēr tirdzniecība un glabāšana ir likumīga, ja tiek ievēroti regulējuma noteikumi.</p>
+      </div>
+      <div class="reg-card">
+        <div class="reg-number">04</div>
+        <h3>Regulējuma nākotne</h3>
+        <p>Eiropas Savienība ir pieņēmusi MiCA (Markets in Crypto-Assets) regulējumu, kas harmonizē kriptovalūtu noteikumus visā ES. Tas nozīmē skaidrākus noteikumus un lielāku aizsardzību patērētājiem nākotnē.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VĀRDNĪCA -->
+<section id="glossary" class="section">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">📖 Vārdnīca</div>
+      <h2 class="section-title">Kriptovalūtu termini</h2>
+      <p class="section-desc">Galvenie termini vienkāršā valodā, lai tu vienmēr varētu saprast, par ko ir runa.</p>
+    </div>
+    <div class="glossary-grid">
+      <div class="gloss-item">
+        <div class="gloss-term">Bitcoin (BTC)</div>
+        <div class="gloss-def">Pirmā un pazīstamākā kriptovalūta, izveidota 2009. gadā.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Blockchain (blokķēde)</div>
+        <div class="gloss-def">Decentralizēta digitāla grāmata, kurā tiek ierakstītas visas transakcijas.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Wallet (maciņš)</div>
+        <div class="gloss-def">Rīks privāto atslēgu glabāšanai, kas dod pieeju tavām kriptovalūtām.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Altcoin</div>
+        <div class="gloss-def">Jebkura kriptovalūta, kas nav Bitcoin — piemēram, Ethereum, Solana, Cardano.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Mining (ieguve)</div>
+        <div class="gloss-def">Process, kurā datori risina sarežģītus uzdevumus, lai apstiprinātu transakcijas un radītu jaunas monētas.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">DeFi</div>
+        <div class="gloss-def">Decentralizētās finanses — finanšu pakalpojumi bez bankām, kas darbojas uz blokķēdes.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">NFT</div>
+        <div class="gloss-def">Neaizstājams tokens — unikāls digitāls sertifikāts, kas apliecina digitāla objekta īpašumtiesības.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">HODL</div>
+        <div class="gloss-def">Stratēģija — turēt kriptovalūtu ilgtermiņā, nepārdodot svārstību laikā. Nāk no pārrakstīta "hold".</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Stablecoin</div>
+        <div class="gloss-def">Kriptovalūta, kuras vērtība ir piesaistīta reālai valūtai (piem., USDT = 1 USD).</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Seed frāze</div>
+        <div class="gloss-def">12–24 vārdu kopums, kas darbojas kā maciņa atslēga. Nekad to nedali ar citiem!</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Gas fee</div>
+        <div class="gloss-def">Komisijas maksa par transakcijas apstrādi blokķēdē, sevišķi Ethereum tīklā.</div>
+      </div>
+      <div class="gloss-item">
+        <div class="gloss-term">Smart contract</div>
+        <div class="gloss-def">Pašizpildošs līgums, kas automātiski izpildās, kad tiek izpildīti noteikti nosacījumi.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTS -->
+<section id="quiz" class="section section-alt">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">✍️ Tests</div>
+      <h2 class="section-title">Pārbaudi savas zināšanas</h2>
+      <p class="section-desc">Atbildi uz 8 jautājumiem un uzzini, cik labi esi apguvis kriptovalūtu pamatus!</p>
+    </div>
+    <div class="quiz-container" id="quizContainer">
+      <div class="quiz-progress">
+        <div class="quiz-progress-bar">
+          <div class="quiz-progress-fill" id="progressFill" style="width: 12.5%;"></div>
+        </div>
+        <div class="quiz-progress-text" id="progressText">1 / 8</div>
+      </div>
+
+      <div id="quizBody">
+        <div class="quiz-question" id="quizQuestion"></div>
+        <div class="quiz-options" id="quizOptions"></div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+        <div class="quiz-actions">
+          <button class="btn btn-primary" id="quizNext" style="display:none;">Nākamais →</button>
+        </div>
+      </div>
+
+      <div class="quiz-result" id="quizResult">
+        <div class="quiz-score" id="scoreDisplay"></div>
+        <div class="quiz-score-label">pareizi atbildēti jautājumi</div>
+        <p id="scoreMessage" style="color: var(--text-secondary); margin-bottom: 24px;"></p>
+        <button class="btn btn-primary btn-large" id="quizRestart">Mēģināt vēlreiz</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="logo" style="margin-bottom: 8px;">
+        <div class="logo-icon">CS</div>
+        CryptoSkola
+      </div>
+      <p>Bezmaksas izglītojoša platforma par kriptovalūtām latviešu valodā. Mūsu mērķis ir izglītot, nevis pārdot.</p>
+      <div class="godiga-dizaina" style="margin-top: 16px;">
+        🛡 Godīga dizaina principi
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Mācības</h4>
+      <a href="#modules">Mācību moduļi</a>
+      <a href="#glossary">Vārdnīca</a>
+      <a href="#quiz">Tests</a>
+    </div>
+    <div class="footer-col">
+      <h4>Informācija</h4>
+      <a href="#sources">Uzticami avoti</a>
+      <a href="#regulations">Regulējums</a>
+    </div>
+    <div class="footer-col">
+      <h4>Kontakti</h4>
+      <a href="#">info@cryptoskola.lv</a>
+      <a href="#">Par mums</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 CryptoSkola. Projekta darbs — Kristiāns Pūce, 12.a</span>
+    <span>Šī vietne nesniedz finanšu padomus</span>
+  </div>
+</footer>
+
+<!-- LOGIN MODĀLIS -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <button class="modal-close" id="closeLogin">&times;</button>
+    <h2>Ielogoties</h2>
+    <p class="modal-subtitle">Ienāc savā kontā, lai turpinātu mācīties</p>
+    <div class="form-group">
+      <label>E-pasts</label>
+      <input type="email" placeholder="tavs@epasts.lv">
+    </div>
+    <div class="form-group">
+      <label>Parole</label>
+      <input type="password" placeholder="••••••••">
+    </div>
+    <button class="btn btn-primary form-submit btn-large" id="submitLogin">Ielogoties</button>
+    <div class="modal-switch">
+      Nav konta? <a id="switchToRegister">Reģistrēties</a>
+    </div>
+  </div>
+</div>
+
+<!-- REĢISTRĀCIJAS MODĀLIS -->
+<div class="modal-overlay" id="registerModal">
+  <div class="modal">
+    <button class="modal-close" id="closeRegister">&times;</button>
+    <h2>Reģistrēties</h2>
+    <p class="modal-subtitle">Izveido kontu un sāc mācīties bezmaksas</p>
+    <div class="form-group">
+      <label>Vārds</label>
+      <input type="text" placeholder="Tavs vārds">
+    </div>
+    <div class="form-group">
+      <label>E-pasts</label>
+      <input type="email" placeholder="tavs@epasts.lv">
+    </div>
+    <div class="form-group">
+      <label>Parole</label>
+      <input type="password" placeholder="Vismaz 8 simboli">
+    </div>
+    <button class="btn btn-primary form-submit btn-large" id="submitRegister">Izveidot kontu</button>
+    <div class="modal-switch">
+      Jau ir konts? <a id="switchToLogin">Ielogoties</a>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  var loginModal = document.getElementById('loginModal');
+  var registerModal = document.getElementById('registerModal');
+
+  document.getElementById('btnLogin').addEventListener('click', function() {
+    loginModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('btnRegister').addEventListener('click', function() {
+    registerModal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('closeLogin').addEventListener('click', function() {
+    loginModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+  document.getElementById('closeRegister').addEventListener('click', function() {
+    registerModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+  document.getElementById('submitLogin').addEventListener('click', function() {
+    alert('Pieslēgšanās veiksmīga! (Demonstrācija)');
+    loginModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+  document.getElementById('submitRegister').addEventListener('click', function() {
+    alert('Konts izveidots veiksmīgi! (Demonstrācija)');
+    registerModal.style.display = 'none';
+    document.body.style.overflow = '';
+  });
+  document.getElementById('switchToRegister').addEventListener('click', function() {
+    loginModal.style.display = 'none';
+    setTimeout(function() { registerModal.style.display = 'flex'; }, 200);
+  });
+  document.getElementById('switchToLogin').addEventListener('click', function() {
+    registerModal.style.display = 'none';
+    setTimeout(function() { loginModal.style.display = 'flex'; }, 200);
+  });
+  loginModal.addEventListener('click', function(e) {
+    if (e.target === loginModal) { loginModal.style.display = 'none'; document.body.style.overflow = ''; }
+  });
+  registerModal.addEventListener('click', function(e) {
+    if (e.target === registerModal) { registerModal.style.display = 'none'; document.body.style.overflow = ''; }
+  });
+
+  var quizData = [
+    { question: "Kas ir Bitcoin?", options: ["Centralizēta digitālā valūta", "Pirmā decentralizētā kriptovalūta", "Bankas izdota virtuālā nauda", "Tiešsaistes maksājumu sistēma"], correct: 1, feedback: "Bitcoin ir pirmā un pazīstamākā decentralizētā kriptovalūta, izveidota 2009. gadā." },
+    { question: "Kas ir blokķēde?", options: ["Datu bāze bankā", "Decentralizēta digitāla grāmata", "Datorprogramma", "Interneta pārlūkprogramma"], correct: 1, feedback: "Blokķēde ir decentralizēta digitāla grāmata, kurā tiek ierakstītas visas transakcijas." },
+    { question: "Kas ir cold wallet?", options: ["Maciņš, kas darbojas tikai ziemā", "Tiešsaistes maciņš", "Bezsaistes maciņš (nav pieslēgts internetam)", "Bankas konts kriptovalūtām"], correct: 2, feedback: "Cold wallet ir bezsaistes maciņš, kas nav pieslēgts internetam, tāpēc tas ir drošāks." },
+    { question: "Ko nozīmē HODL?", options: ["Kriptovalūtas pārdošana", "Ilgtermiņa turēšanas stratēģija", "Jauna kriptovalūtas izveide", "Tirgus analīzes metode"], correct: 1, feedback: "HODL nozīmē kriptovalūtas turēšanu ilgtermiņā, nepārdodot svārstību laikā." },
+    { question: "Kas ir NFT?", options: ["Jauna kriptovalūta", "Neaizstājams tokens ar unikālu vērtību", "Bankas sertifikāts", "Interneta protokols"], correct: 1, feedback: "NFT ir neaizstājams tokens, kas apliecina unikāla digitāla objekta īpašumtiesības." },
+    { question: "Kāds ir galvenais krāpniecības brīdinājuma signāls?", options: ["Vietne ir angļu valodā", "Tiek solīta garantēta peļņa", "Ir nepieciešama reģistrācija", "Saturs ir par kriptovalūtām"], correct: 1, feedback: "Ja kāds sola garantētu peļņu — tā gandrīz vienmēr ir krāpniecība." },
+    { question: "Kas ir seed frāze?", options: ["Kriptovalūtas nosaukums", "Parole biržas kontam", "12-24 vārdu maciņa atjaunošanas atslēga", "Blokķēdes termins"], correct: 2, feedback: "Seed frāze ir 12-24 vārdu kopums, kas ļauj atjaunot pieeju tavam kriptovalūtu maciņam." },
+    { question: "Kā Latvijā tiek aplikti ienākumi no kriptovalūtām?", options: ["Netiek aplikti ar nodokļiem", "Ar iedzīvotāju ienākuma nodokli", "Tikai uzņēmumiem jāmaksā", "Ar PVN"], correct: 1, feedback: "Latvijā peļņa no kriptovalūtām ir apliekama ar iedzīvotāju ienākuma nodokli un jādeklarē VID." }
+  ];
+
+  var currentQ = 0, score = 0, answered = false;
+  var letters = ['A', 'B', 'C', 'D'];
+  var quizQuestion = document.getElementById('quizQuestion');
+  var quizOptions = document.getElementById('quizOptions');
+  var quizFeedback = document.getElementById('quizFeedback');
+  var quizNext = document.getElementById('quizNext');
+  var progressFill = document.getElementById('progressFill');
+  var progressText = document.getElementById('progressText');
+  var quizBody = document.getElementById('quizBody');
+  var quizResult = document.getElementById('quizResult');
+
+  function loadQuestion() {
+    var q = quizData[currentQ];
+    quizQuestion.textContent = q.question;
+    progressFill.style.width = ((currentQ + 1) / quizData.length * 100) + '%';
+    progressText.textContent = (currentQ + 1) + ' / ' + quizData.length;
+    quizOptions.innerHTML = '';
+    for (var i = 0; i < q.options.length; i++) {
+      var div = document.createElement('div');
+      div.className = 'quiz-option';
+      var span = document.createElement('span');
+      span.className = 'quiz-option-letter';
+      span.textContent = letters[i];
+      div.appendChild(span);
+      div.appendChild(document.createTextNode(' ' + q.options[i]));
+      (function(idx, el) { el.addEventListener('click', function() { selectAnswer(idx, el); }); })(i, div);
+      quizOptions.appendChild(div);
+    }
+    quizFeedback.style.display = 'none';
+    quizFeedback.className = 'quiz-feedback';
+    quizNext.style.display = 'none';
+    answered = false;
+  }
+
+  function selectAnswer(index, element) {
+    if (answered) return;
+    answered = true;
+    var q = quizData[currentQ];
+    var options = quizOptions.querySelectorAll('.quiz-option');
+    for (var j = 0; j < options.length; j++) {
+      options[j].style.pointerEvents = 'none';
+      if (j === q.correct) options[j].classList.add('correct');
+    }
+    if (index === q.correct) {
+      element.classList.add('correct');
+      quizFeedback.className = 'quiz-feedback correct';
+      quizFeedback.textContent = 'Pareizi! ' + q.feedback;
+      score++;
+    } else {
+      element.classList.add('wrong');
+      quizFeedback.className = 'quiz-feedback wrong';
+      quizFeedback.textContent = 'Nepareizi. ' + q.feedback;
+    }
+    quizFeedback.style.display = 'block';
+    quizNext.style.display = 'inline-flex';
+  }
+
+  quizNext.addEventListener('click', function() {
+    currentQ++;
+    if (currentQ < quizData.length) { loadQuestion(); } else { showResult(); }
+  });
+
+  function showResult() {
+    quizBody.style.display = 'none';
+    document.querySelector('.quiz-progress').style.display = 'none';
+    quizResult.style.display = 'block';
+    document.getElementById('scoreDisplay').textContent = score + ' / ' + quizData.length;
+    var pct = score / quizData.length;
+    var msg = '';
+    if (pct === 1) msg = 'Izcili! Tu perfekti pārzini kriptovalūtu pamatus!';
+    else if (pct >= 0.75) msg = 'Ļoti labi! Tev ir labas pamatzināšanas par kriptovalūtām.';
+    else if (pct >= 0.5) msg = 'Labs sākums! Ieteicam pārlasīt moduļus, lai nostiprinātu zināšanas.';
+    else msg = 'Nepadodies! Izlasi mācību moduļus un mēģini vēlreiz.';
+    document.getElementById('scoreMessage').textContent = msg;
+  }
+
+  document.getElementById('quizRestart').addEventListener('click', function() {
+    currentQ = 0; score = 0;
+    quizBody.style.display = 'block';
+    document.querySelector('.quiz-progress').style.display = 'flex';
+    quizResult.style.display = 'none';
+    loadQuestion();
+  });
+
+  loadQuestion();
+})();
+</script>
+
+</body>
+</html>
